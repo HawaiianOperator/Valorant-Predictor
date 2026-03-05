@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS2 Match Tracker - CS2 Tracker Network</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/cs2-tracker.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>CS2 Tracker Network</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cs2-tracker.html" class="active">CS2 Tracker</a></li>
+                <li><a href="valorant-tracker.html">Valorant Tracker</a></li>
+                <li><a href="fallout4-tracker.html">Fallout 4 Tracker</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="tracker-main">
+        <div class="container">
+            <header class="page-header">
+                <h1>CS2 Match Tracker</h1>
+                <p>Live match tracking with real-time odds and comprehensive player statistics</p>
+            </header>
+
+            <!-- API Configuration Section -->
+            <section class="config-section">
+                <h2>API Configuration</h2>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label for="leetify-api">Leetify API Key (Optional):</label>
+                        <input type="text" id="leetify-api" placeholder="Enter Leetify API key">
+                        <small>Data source: Leetify.com</small>
+                    </div>
+                    <div class="config-item">
+                        <label for="steam-api">Steam API Key:</label>
+                        <input type="text" id="steam-api" placeholder="Enter Steam API key">
+                        <small>Required for live match tracking</small>
+                    </div>
+                    <div class="config-item">
+                        <label for="steam-id">Steam ID / Profile URL:</label>
+                        <input type="text" id="steam-id" placeholder="Steam ID or profile URL">
+                        <button id="connect-btn" class="btn btn-primary">Connect</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Algorithm Parameters -->
+            <section class="params-section">
+                <h2>Odds Calculation Parameters</h2>
+                <div class="params-grid">
+                    <div class="param-group">
+                        <label for="rating-weight">Team Rating Weight:</label>
+                        <input type="range" id="rating-weight" min="0" max="100" value="40">
+                        <span class="param-value" id="rating-value">40%</span>
+                    </div>
+                    <div class="param-group">
+                        <label for="form-weight">Recent Form Weight:</label>
+                        <input type="range" id="form-weight" min="0" max="100" value="25">
+                        <span class="param-value" id="form-value">25%</span>
+                    </div>
+                    <div class="param-group">
+                        <label for="h2h-weight">Head-to-Head Weight:</label>
+                        <input type="range" id="h2h-weight" min="0" max="100" value="15">
+                        <span class="param-value" id="h2h-value">15%</span>
+                    </div>
+                    <div class="param-group">
+                        <label for="map-weight">Map Advantage Weight:</label>
+                        <input type="range" id="map-weight" min="0" max="100" value="10">
+                        <span class="param-value" id="map-value">10%</span>
+                    </div>
+                    <div class="param-group">
+                        <label for="live-weight">Live Performance Weight:</label>
+                        <input type="range" id="live-weight" min="0" max="100" value="10">
+                        <span class="param-value" id="live-value">10%</span>
+                    </div>
+                </div>
+                <button id="update-params-btn" class="btn btn-secondary">Update Parameters</button>
+            </section>
+
+            <!-- Live Matches Section -->
+            <section class="matches-section">
+                <div class="section-header">
+                    <h2>Live Matches</h2>
+                    <button id="refresh-matches-btn" class="btn btn-primary">Refresh Matches</button>
+                </div>
+                <div id="matches-container" class="matches-container">
+                    <div class="loading">Loading live matches...</div>
+                </div>
+            </section>
+
+            <!-- Match Details Modal -->
+            <div id="match-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="match-details"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 CS2 Tracker Network. All rights reserved.</p>
+        <p>Data provided by Leetify.com and Steam API</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Configuration and Services -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-service.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/migration.js"></script>
+    <script src="js/auth-guard.js"></script>
+    
+    <script src="js/leetify-api.js"></script>
+    <script src="js/steam-api.js"></script>
+    <script src="js/odds-algorithm.js"></script>
+    <script src="js/cs2-tracker.js"></script>
+    <script>
+      window.requireAuth?.({ redirectTo: "index.html" });
+    </script>
+</body>
+</html>

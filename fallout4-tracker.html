@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fallout 4 Tracker - CS2 Tracker Network</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/fallout4-tracker.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>CS2 Tracker Network</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cs2-tracker.html">CS2 Tracker</a></li>
+                <li><a href="valorant-tracker.html">Valorant Tracker</a></li>
+                <li><a href="fallout4-tracker.html" class="active">Fallout 4 Tracker</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="tracker-main">
+        <div class="container">
+            <header class="page-header">
+                <h1>Fallout 4 Progress Tracker</h1>
+                <p>Track your gameplay progress, achievements, and statistics</p>
+            </header>
+
+            <!-- Game Integration Section -->
+            <section class="integration-section">
+                <h2>Game Integration</h2>
+                <div class="integration-content">
+                    <div class="integration-info">
+                        <p>Connect your Fallout 4 save files to automatically track your progress. The tracker can read save game data to update statistics in real-time.</p>
+                        <div class="integration-options">
+                            <label for="save-file-input" class="btn btn-primary" style="display: inline-block; cursor: pointer;">
+                                Select Save File
+                                <input type="file" id="save-file-input" accept=".fos" style="display: none;">
+                            </label>
+                            <button id="scan-saves-btn" class="btn btn-secondary">Scan Save Directory</button>
+                        </div>
+                        <small style="display: block; margin-top: 1rem; color: var(--text-light);">
+                            Save files are typically located in: Documents/My Games/Fallout4/Saves/
+                        </small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Overview -->
+            <section class="stats-section">
+                <h2>Statistics Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-value" id="playtime">0h 0m</div>
+                        <div class="stat-label">Total Playtime</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-value" id="level">1</div>
+                        <div class="stat-label">Character Level</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value" id="quests-completed">0</div>
+                        <div class="stat-label">Quests Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💀</div>
+                        <div class="stat-value" id="enemies-killed">0</div>
+                        <div class="stat-label">Enemies Killed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value" id="achievements-unlocked">0</div>
+                        <div class="stat-label">Achievements Unlocked</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📍</div>
+                        <div class="stat-value" id="locations-discovered">0</div>
+                        <div class="stat-label">Locations Discovered</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Tracking -->
+            <section class="progress-section">
+                <h2>Progress Tracking</h2>
+                <div class="progress-tabs">
+                    <button class="tab-btn active" data-tab="main-quest">Main Quest</button>
+                    <button class="tab-btn" data-tab="side-quests">Side Quests</button>
+                    <button class="tab-btn" data-tab="factions">Factions</button>
+                    <button class="tab-btn" data-tab="settlements">Settlements</button>
+                </div>
+
+                <div class="tab-content active" id="main-quest">
+                    <div class="quest-list" id="main-quest-list">
+                        <!-- Quest items will be populated here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="side-quests">
+                    <div class="quest-list" id="side-quest-list">
+                        <!-- Side quest items will be populated here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="factions">
+                    <div class="faction-list" id="faction-list">
+                        <!-- Faction items will be populated here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="settlements">
+                    <div class="settlement-list" id="settlement-list">
+                        <!-- Settlement items will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section class="achievements-section">
+                <h2>Achievement Tracking</h2>
+                <div class="achievements-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="unlocked">Unlocked</button>
+                    <button class="filter-btn" data-filter="locked">Locked</button>
+                </div>
+                <div class="achievements-grid" id="achievements-grid">
+                    <!-- Achievements will be populated here -->
+                </div>
+            </section>
+
+            <!-- Character Stats -->
+            <section class="character-section">
+                <h2>Character Statistics</h2>
+                <div class="character-stats-grid">
+                    <div class="character-stat-group">
+                        <h3>SPECIAL Stats</h3>
+                        <div class="special-stats" id="special-stats">
+                            <!-- SPECIAL stats will be populated here -->
+                        </div>
+                    </div>
+                    <div class="character-stat-group">
+                        <h3>Combat Stats</h3>
+                        <div class="combat-stats" id="combat-stats">
+                            <!-- Combat stats will be populated here -->
+                        </div>
+                    </div>
+                    <div class="character-stat-group">
+                        <h3>Exploration Stats</h3>
+                        <div class="exploration-stats" id="exploration-stats">
+                            <!-- Exploration stats will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 CS2 Tracker Network. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Configuration and Services -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-service.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/migration.js"></script>
+    <script src="js/auth-guard.js"></script>
+    
+    <script src="js/fallout4-tracker.js"></script>
+    <script>
+      window.requireAuth?.({ redirectTo: "index.html" });
+    </script>
+</body>
+</html>

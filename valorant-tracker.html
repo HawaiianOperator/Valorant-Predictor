@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valorant Tracker - CS2 Tracker Network</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/valorant-tracker.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <h1>CS2 Tracker Network</h1>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cs2-tracker.html">CS2 Tracker</a></li>
+        <li><a href="valorant-tracker.html" class="active">Valorant Tracker</a></li>
+        <li><a href="fallout4-tracker.html">Fallout 4 Tracker</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="tracker-main">
+    <div class="container">
+      <header class="page-header">
+        <h1>Valorant Tracker</h1>
+        <p>Match history + round-by-round review (kills, damage, mistakes)</p>
+      </header>
+
+      <section class="config-section">
+        <h2>Data Source</h2>
+        <div class="config-grid">
+          <div class="config-item">
+            <label for="riot-id">Riot ID</label>
+            <input id="riot-id" type="text" placeholder="Name#TAG (e.g. TenZ#NA1)">
+            <small>Optional (for API integrations later)</small>
+          </div>
+          <div class="config-item">
+            <label for="match-json">Import match JSON</label>
+            <input id="match-json" type="file" accept="application/json">
+            <small>Use this to enable round-by-round review immediately.</small>
+          </div>
+          <div class="config-item">
+            <button id="load-mock-btn" class="btn btn-secondary">Load Mock Match</button>
+            <small>Dev/demo data</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="review-section">
+        <div class="section-header">
+          <h2>Round Review</h2>
+          <div class="round-controls">
+            <button id="prev-round" class="btn btn-secondary" disabled>Prev</button>
+            <div class="round-indicator" id="round-indicator">No match loaded</div>
+            <button id="next-round" class="btn btn-secondary" disabled>Next</button>
+          </div>
+        </div>
+
+        <div class="round-grid">
+          <div class="panel">
+            <h3>Round Summary</h3>
+            <div id="round-summary" class="panel-body muted">Import a match JSON to begin.</div>
+          </div>
+          <div class="panel">
+            <h3>Kills</h3>
+            <div id="round-kills" class="panel-body muted">—</div>
+          </div>
+          <div class="panel">
+            <h3>Damage</h3>
+            <div id="round-damage" class="panel-body muted">—</div>
+          </div>
+          <div class="panel">
+            <h3>Mistake Notes</h3>
+            <div class="panel-body">
+              <textarea id="mistake-notes" rows="7" placeholder="Write notes for this round (positioning, utility, timing, aim, etc.)" disabled></textarea>
+              <button id="save-notes" class="btn btn-primary" disabled>Save Notes</button>
+              <div id="notes-status" class="muted notes-status"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CS2 Tracker Network. All rights reserved.</p>
+  </footer>
+
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+  <!-- Firebase Configuration and Services -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/auth-service.js"></script>
+  <script src="js/auth-guard.js"></script>
+
+  <script src="js/valorant-api.js"></script>
+  <script src="js/valorant-tracker.js"></script>
+  <script>
+    window.requireAuth?.({ redirectTo: "index.html" });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>CS2 Tracker Network</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>CS2 Tracker Network</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="cs2-tracker.html">CS2 Tracker</a></li>
+                <li><a href="valorant-tracker.html">Valorant Tracker</a></li>
+                <li><a href="fallout4-tracker.html">Fallout 4 Tracker</a></li>
+            </ul>
+            <div class="auth-status" id="auth-status">
+                <span id="user-display" style="display: none;"></span>
+                <button id="sign-in-btn" class="btn btn-small">Sign In</button>
+                <button id="sign-out-btn" class="btn btn-small" style="display: none;">Sign Out</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content auth-modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" data-tab="signin">Sign In</button>
+                <button class="auth-tab-btn" data-tab="signup">Sign Up</button>
+            </div>
+
+            <!-- Sign In Form -->
+            <div id="signin-form" class="auth-form active">
+                <h2>Sign In</h2>
+                <form id="signin-form-element">
+                    <div class="form-group">
+                        <label for="signin-email">Email:</label>
+                        <input type="email" id="signin-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Password:</label>
+                        <input type="password" id="signin-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+                <button id="google-signin-btn" class="btn btn-google">
+                    <span>🔍</span> Sign in with Google
+                </button>
+                <div id="signin-error" class="error-message"></div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div id="signup-form" class="auth-form">
+                <h2>Sign Up</h2>
+                <form id="signup-form-element">
+                    <div class="form-group">
+                        <label for="signup-name">Display Name:</label>
+                        <input type="text" id="signup-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email:</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password:</label>
+                        <input type="password" id="signup-password" required minlength="6">
+                        <small>Minimum 6 characters</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+                <button id="google-signup-btn" class="btn btn-google">
+                    <span>🔍</span> Sign up with Google
+                </button>
+                <div id="signup-error" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="homepage">
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Welcome to CS2 Tracker Network</h2>
+                <p class="hero-subtitle">Comprehensive tracking and analytics for CS2 matches and Fallout 4 progress</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>CS2 Match Tracker</h3>
+                    <p>Track live CS2 matches with real-time odds, player statistics, and comprehensive match analysis powered by Leetify.com data.</p>
+                    <ul class="feature-list">
+                        <li>Live match odds calculation</li>
+                        <li>Player performance metrics (KDR, ADR, Time to Damage)</li>
+                        <li>Match history and opponent tracking</li>
+                        <li>Steam API integration for live matches</li>
+                    </ul>
+                    <a href="cs2-tracker.html" class="btn btn-primary requires-auth" data-requires-auth="true">Go to CS2 Tracker</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fallout 4 Progress Tracker</h3>
+                    <p>Monitor your Fallout 4 gameplay progress, achievements, and statistics with seamless game integration.</p>
+                    <ul class="feature-list">
+                        <li>Progress tracking and statistics</li>
+                        <li>Achievement monitoring</li>
+                        <li>Game integration support</li>
+                        <li>Detailed progress analytics</li>
+                    </ul>
+                    <a href="fallout4-tracker.html" class="btn btn-primary requires-auth" data-requires-auth="true">Go to Fallout 4 Tracker</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Valorant Tracker</h3>
+                    <p>Track your Valorant matches and review round-by-round events (kills, damage, mistakes) using imported match data or an API integration.</p>
+                    <ul class="feature-list">
+                        <li>Match history (API/import)</li>
+                        <li>Round-by-round review</li>
+                        <li>Kills + damage per round</li>
+                        <li>Notes for gameplay mistakes</li>
+                    </ul>
+                    <a href="valorant-tracker.html" class="btn btn-primary requires-auth" data-requires-auth="true">Go to Valorant Tracker</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>About CS2 Tracker Network</h2>
+            <div class="info-content">
+                <div class="info-item">
+                    <h3>Data Sources</h3>
+                    <p>Our CS2 tracker integrates with <strong>Leetify.com</strong> for comprehensive match data and statistics. For live match tracking, we utilize the <strong>Steam API</strong> to provide real-time updates.</p>
+                </div>
+                <div class="info-item">
+                    <h3>Features</h3>
+                    <p>Get detailed insights into player performance including load times, opponent analysis, time to damage, KDR (Kill/Death Ratio), ADR (Average Damage per Round), and much more.</p>
+                </div>
+                <div class="info-item">
+                    <h3>Real-Time Updates</h3>
+                    <p>Stay up-to-date with live match odds and statistics as matches progress. Our parameterized algorithm adapts to match conditions in real-time.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 CS2 Tracker Network. All rights reserved.</p>
+        <p>Data provided by Leetify.com and Steam API</p>
+    </footer>
+
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Configuration and Services -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-service.js"></script>
+    <script src="js/auth-service.js"></script>
+    <script src="js/migration.js"></script>
+    <script src="js/auth-ui.js"></script>
+</body>
+</html>
