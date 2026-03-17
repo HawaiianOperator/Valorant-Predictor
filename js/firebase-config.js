@@ -8,30 +8,16 @@
  * Firebase Console → Project settings → General → Your apps (Web) → Config
  */
 
-// eslint-disable-next-line no-unused-vars
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDcFS-w4fvpeJfP6UNai1wNG1212_5o5pg",
-    authDomain: "cs-tracker-network.firebaseapp.com",
-    projectId: "cs-tracker-network",
-    storageBucket: "cs-tracker-network.firebasestorage.app",
-    messagingSenderId: "901953081591",
-    appId: "1:901953081591:web:dfe953b796226d303b83f2",
-    measurementId: "G-XXYCQJ6SFE"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBamwItlay70738UP_iIyLkqDLV-yKZLeU",
+  authDomain: "cs2-tracker-db.firebaseapp.com",
+  projectId: "cs2-tracker-db",
+  storageBucket: "cs2-tracker-db.firebasestorage.app",
+  messagingSenderId: "71548814520",
+  appId: "1:71548814520:web:95867f7f6e770ff26aa04d",
+  measurementId: "G-Z4H1NKDB1J"
+};
 // Expose initialized instances as globals (used by other scripts).
 // eslint-disable-next-line no-unused-vars
 let app;

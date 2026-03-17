@@ -57,7 +57,10 @@
       const overlay = document.getElementById(gateId);
       if (overlay) overlay.remove();
     }
-
+    if (!window.authService) {
+    console.warn("authService not ready; skipping hard auth gate.");
+    return;
+    }
     function ensureAuthReady() {
       if (typeof authService === "undefined") {
         setTimeout(ensureAuthReady, 100);

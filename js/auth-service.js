@@ -3,6 +3,7 @@
  * Handles user authentication with Firebase Auth
  */
 
+const auth = firebase.auth();
 class AuthService {
     constructor() {
         this.auth = null;
@@ -11,14 +12,14 @@ class AuthService {
         this.initializeAuth();
     }
 
-    initializeAuth() {
-        if (typeof firebase !== 'undefined' && auth) {
-            this.auth = auth;
-            this.setupAuthStateListener();
-        } else {
-            setTimeout(() => this.initializeAuth(), 100);
-        }
-    }
+initializeAuth() {
+  if (typeof firebase !== 'undefined' && firebase?.apps?.length) {
+    this.auth = firebase.auth();
+    this.setupAuthStateListener();
+  } else {
+    setTimeout(() => this.initializeAuth(), 100);
+  }
+}
 
     setupAuthStateListener() {
         if (!this.auth) return;
