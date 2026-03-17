@@ -1,3 +1,7 @@
+let app;
+let auth;
+let firestore;
+let realtimeDb;
 /**
  * Firebase Configuration (compat SDK)
  *
@@ -18,15 +22,8 @@ const firebaseConfig = {
   appId: "1:71548814520:web:95867f7f6e770ff26aa04d",
   measurementId: "G-Z4H1NKDB1J"
 };
+
 // Expose initialized instances as globals (used by other scripts).
-// eslint-disable-next-line no-unused-vars
-let app;
-// eslint-disable-next-line no-unused-vars
-let auth;
-// eslint-disable-next-line no-unused-vars
-let firestore;
-// eslint-disable-next-line no-unused-vars
-let realtimeDb;
 
 function initializeFirebaseCompat() {
   if (typeof firebase === "undefined") {
@@ -40,16 +37,8 @@ function initializeFirebaseCompat() {
     firestore = firebase.firestore();
     realtimeDb = firebase.database();
 
-    // Enable offline persistence for Firestore (best-effort).
-    firestore.enablePersistence().catch((err) => {
-      if (err?.code === "failed-precondition") {
-        console.warn("Firestore persistence disabled: multiple tabs open.");
-      } else if (err?.code === "unimplemented") {
-        console.warn("Firestore persistence unavailable in this browser.");
-      } else {
-        console.warn("Firestore persistence error:", err);
-      }
-    });
+    // 🔕 Removed deprecated persistence call (was causing warning)
+
   } catch (error) {
     console.error("Firebase initialization error:", error);
   }

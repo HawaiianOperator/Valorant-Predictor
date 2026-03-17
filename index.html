@@ -14,10 +14,10 @@
                 <h1>CS2 Tracker Network</h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="/index.html" class="active">Home</a></li>
                 <li><a href="/tracker_ops/cs2-tracker.html">CS2 Tracker</a></li>
                 <li><a href="/tracker_ops/valorant-tracker.html">Valorant Tracker</a></li>
-                <li><a href="tracker_ops/fallout4-tracker.html">Fallout 4 Tracker</a></li>
+                <li><a href="/tracker_ops/fallout4-tracker.html">Fallout 4 Tracker</a></li>
             </ul>
             <div class="auth-status" id="auth-status">
                 <span id="user-display" style="display: none;"></span>
@@ -176,5 +176,12 @@
     <script src="/js/auth-service.js"></script>
     <script src="/js/migration.js"></script>
     <script src="/js/auth-ui.js"></script>
+    <script>
+    <div id="auth-nudge"></div>
+  window.requireAuth?.({
+    mode: "prompt",
+    mount: "auth-nudge"
+  });
+</script>
 </body>
 </html>

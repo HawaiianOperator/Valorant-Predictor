@@ -1,6 +1,6 @@
 /**
  * Auth Service
- * Wraps Firebase Auth for the rest of the app.
+ * Firebase compat wrapper used by auth-ui.js and auth-guard.js
  */
 
 class AuthService {
@@ -9,20 +9,18 @@ class AuthService {
     this.user = null;
     this._ready = false;
     this._readyCallbacks = [];
-    this._unsubscribe = null;
 
     this.initializeAuth();
   }
 
   initializeAuth() {
-    // Wait until Firebase compat SDK is loaded and app initialized.
     if (
       typeof window.firebase !== "undefined" &&
       window.firebase.apps &&
       window.firebase.apps.length > 0
     ) {
       this.auth = window.firebase.auth();
-      this.setupAuthStateListener();
+      this.setupInternalAuthListener();
       this._ready = true;
 
       while (this._readyCallbacks.length) {
@@ -38,11 +36,10 @@ class AuthService {
     }
   }
 
-  setupAuthStateListener() {
+  setupInternalAuthListener() {
     if (!this.auth) return;
 
-    // Keep one internal listener for service state.
-    this._unsubscribe = this.auth.onAuthStateChanged((user) => {
+    this.auth.onAuthStateChanged((user) => {
       this.user = user || null;
       if (user) {
         console.log("User signed in:", user.email || user.uid);
@@ -60,8 +57,12 @@ class AuthService {
     }
   }
 
+  async waitUntilReady() {
+    if (this._ready) return;
+    await new Promise((resolve) => this.onReady(resolve));
+  }
+
   onAuthStateChanged(callback) {
-    // This is the missing method your auth-ui.js expects.
     this.onReady((service) => {
       service.auth.onAuthStateChanged((user) => {
         service.user = user || null;
@@ -83,17 +84,35 @@ class AuthService {
   }
 
   async signInWithEmail(email, password) {
-    await new Promise((resolve) => this.onReady(resolve));
+    await this.waitUntilReady();
     return this.auth.signInWithEmailAndPassword(email, password);
   }
 
   async signUpWithEmail(email, password) {
-    await new Promise((resolve) => this.onReady(resolve));
+    await this.waitUntilReady();
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
+  async signInWithGoogle() {
+    await this.waitUntilReady();
+
+    const provider = new window.firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+
+    return this.auth.signInWithPopup(provider);
+  }
+
+  async signInWithGoogleRedirect() {
+    await this.waitUntilReady();
+
+    const provider = new window.firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+
+    return this.auth.signInWithRedirect(provider);
+  }
+
   async signOut() {
-    await new Promise((resolve) => this.onReady(resolve));
+    await this.waitUntilReady();
     return this.auth.signOut();
   }
 }
